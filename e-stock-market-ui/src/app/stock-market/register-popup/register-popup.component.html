@@ -1,0 +1,86 @@
+<div class="container" style="padding-left: 0px;
+padding-right: 0px;">
+    <h1>
+        <mat-toolbar color="primary">
+            <span>Register</span>
+        </mat-toolbar>
+    </h1>
+
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" style="padding-left: 15px;
+    padding-right: 15px;">
+        <div class="form-group">
+            <label for="name">Company Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Company Name"
+                formControlName="companyName" />
+        </div>
+        <div *ngIf="formGroup.controls['companyName'].invalid && formGroup.controls['companyName'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['companyName'].errors.required">
+                Company Name is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="companyCode">Company Code</label>
+            <input type="text" class="form-control" id="companyCode" placeholder="Company Code"
+                formControlName="companyCode" />
+        </div>
+        <div *ngIf="formGroup.controls['companyCode'].invalid && formGroup.controls['companyCode'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['companyCode'].errors.required">
+                Company Code is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ceo">Company CEO</label>
+            <input type="text" class="form-control" id="ceo" placeholder="Company CEO" formControlName="companyCEO" />
+        </div>
+        <div *ngIf="formGroup.controls['companyCEO'].invalid && formGroup.controls['companyCEO'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['companyCEO'].errors.required">
+                Company CEO is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="turnover">Company Turnover</label>
+            <input type="number" class="form-control" id="turnover" placeholder="Company Turnover"
+                formControlName="companyTurnover" />
+        </div>
+        <div *ngIf="formGroup.controls['companyTurnover'].invalid && formGroup.controls['companyTurnover'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['companyTurnover'].errors.required">
+                Company Turnover is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="website">Company Website</label>
+            <input type="text" class="form-control" id="website" placeholder="Company Website"
+                formControlName="companyWebsite" />
+        </div>
+        <div *ngIf="formGroup.controls['companyWebsite'].invalid && formGroup.controls['companyWebsite'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['companyWebsite'].errors.required">
+                Company Website is required.
+            </div>
+        </div>
+        <div class="form-group ">
+            <label for="exchange">Stock Exchange</label>
+            <mat-select [disabled]="false " id="exchange" formControlName="stockExchange">
+                <mat-option value="BSE">BSE</mat-option>
+                <mat-option value="NSE">NSE</mat-option>
+            </mat-select>
+        </div>
+        <div *ngIf="formGroup.controls['stockExchange'].invalid && formGroup.controls['stockExchange'].touched"
+            class="alert alert-danger">
+            <div *ngIf="formGroup.controls['stockExchange'].errors.required">
+                Stock Exchange is required.
+            </div>
+        </div>
+        <div calss="row">
+            <div class="col-10 float-right">
+                <button class="btn btn-primary m-2" [disabled]="formGroup.invalid" type="submit">Register</button>
+
+                <button class="btn btn-primary m-2" type="reset" (click)="closePopup()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

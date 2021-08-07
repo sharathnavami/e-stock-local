@@ -1,0 +1,22 @@
+<div class="shadow container w-25 " style="margin-top: 120px;">
+    <div>
+        <h3>Register with E-Stock Market</h3>
+    </div>
+    <div>
+        <label for="email">Email address</label>
+        <br />
+        <input type="email" name="email" [(ngModel)]="email" required placeholder="Enter your email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <br />
+        <input type="password" [(ngModel)]="password" name="password" required placeholder="Enter your password">
+    </div>
+
+    <div>
+        <br />
+        <button (click)="register()" class="btn btn-sm btn-primary" color="primary" type="button"> Register
+        </button>
+    </div>
+    <p class="text-dark mb-0">Already a member?<a href="/login" class="text-primary ml-1">Login</a></p>
+</div>

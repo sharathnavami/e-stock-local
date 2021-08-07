@@ -1,0 +1,12 @@
+.table-style {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  color: white;
+  background-color: #042241;
+}
+
+.table-style {
+  background-color: white;
+}

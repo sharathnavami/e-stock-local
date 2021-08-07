@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row d-flex justify-content-around ">
+        <div class="col-md-5 col-sm-12 shadow border p-0">
+            <div class="pr-3 pl-3 pt-2 pb-2" style="background-color: #042241;color: white;">
+                <h2 class="m-0">Search By:</h2>
+            </div>
+            <div class="row pl-3 pt-3">
+                <div class="col-4">
+                    <span color="primary">Company Code:</span>
+                </div>
+                <div class="col-8">
+                    <input matInput type="text" disabled="true" placeholder="Company Code" [(ngModel)]="companyCode"
+                        class="search-input" />
+                </div>
+            </div>
+            <div class="row pl-3 pt-3">
+                <div class="col-4">
+                    <span color="primary">From:</span>
+                </div>
+                <div class="col-8">
+                    <input matInput [matDatepicker]="frompicker" placeholder="Stock From Date" [(ngModel)]="fromDate">
+                    <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                    <mat-datepicker #frompicker></mat-datepicker>
+                    <div *ngIf="!validFromDate" class='alert alert-danger'>From date is required</div>
+                </div>
+            </div>
+            <div class="row pl-3 pt-3">
+                <div class="col-4">
+                    <span color="primary">To:</span>
+                </div>
+                <div class="col-8">
+                    <input matInput [matDatepicker]="topicker" placeholder="Stock To Date" [(ngModel)]="toDate">
+                    <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                    <mat-datepicker #topicker></mat-datepicker>
+                    <div *ngIf="!validToDate" class='alert alert-danger'>To date is required</div>
+                </div>
+            </div>
+            <div class="row pl-3 pt-3 pb-3 justify-content-center">
+                <div class="col-3">
+                    <button mat-button (click)="fetchStockDetails()" class="btn btn-sm btn-primary">Search</button>
+                </div>
+                <div class="col-3">
+                    <button mat-button (click)="resetSearchResult()" class="btn btn-sm btn-primary ml-3">Clear</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-md-5 col-sm-12 shadow border p-0">
+            <div class="row ml-0 mr-0" style="background-color: #042241;color: white;">
+                <div class="col-md-6 col-sm-12 pr-3 pl-3 pt-2 pb-1">
+                    <h2 class="mb-2">Select Company</h2>
+                </div>
+                <div class="col-md-6 col-sm-12 pt-2 pb-2">
+                    <div class=float-right>
+                        <app-action-section></app-action-section>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-3 mb-3 pl-3">
+                <div class="col-4">
+                    <span color="primary">Company Name:</span>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-select [(ngModel)]="companyCode">
+                                <mat-option *ngFor="let company of companyList" [value]="company.companyCode">
+                                    {{company.companyName}}
+                                </mat-option>
+                            </mat-select>
+                            <button mat-icon-button class="btn btn-sm btn-primary"
+                                style="padding: 0px 0px;background-color: transparent;border-color: transparent;"
+                                (click)="refresh()">
+                                <mat-icon class="search-icon"
+                                    style="font-size: x-large;color: black;padding-left: 10px;">refresh</mat-icon>
+                            </button>
+                        </div>
+                        <div *ngIf="!validCompanyName" class='alert alert-danger'>Company Name is required</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="float-right">
+            <input matInput type="text" placeholder="search here" [(ngModel)]="searchCompanyCode" class="search-input">
+            <span>
+                <button mat-icon-button (click)="searchCompanies()">
+                    <mat-icon class="search-icon">search</mat-icon>
+                </button>
+            </span>
+        </div> -->
+            <div class="row pl-3 justify-content-center mb-3">
+                <div class="col-4 col-sm-12 col-md-4">
+                    <button mat-button *ngIf="companyCode !== undefined && companyCode !== null"
+                        (click)="showAddStockFn()" class="btn btn-sm btn-primary">Add Stock</button>
+                    <button mat-button *ngIf="companyCode === undefined || companyCode === null"
+                        (click)="showAddStockFn()" disabled="true" class="btn btn-sm btn-primary">Add
+                        Stock</button>
+                </div>
+                <div class="col-5 col-sm-12 col-md-5">
+                    <button mat-button *ngIf=" companyCode !==undefined && companyCode !==null"
+                        (click)="deleteCompany()" class="btn btn-sm btn-primary">Delete Company</button>
+                    <button mat-button *ngIf="companyCode === undefined || companyCode === null"
+                        (click)="deleteCompany()" disabled="true" class="btn btn-sm btn-primary">Delete
+                        Company</button>
+                </div>
+            </div>
+            <div *ngIf="showAddStock">
+                <div class="row pl-3 mt-1 justify-content-around">
+                    <div>
+                        <h2>Add Stock:</h2>
+                    </div>
+                </div>
+                <div class="row pl-3 mt-1 justify-content-around">
+                    <div class="col-5 col-md-5 col-sm-auto">
+                        <input matInput type="text" placeholder="stock price" [(ngModel)]="stockPrice"
+                            class="search-input" />
+                    </div>
+                    <div class="col-3 col-md-3 col-sm-auto">
+                        <button mat-button (click)="addStockToCompany()" class="btn btn-sm btn-primary ">Submit</button>
+                    </div>
+                    <div class="col-3 col-md-3 col-sm-auto">
+                        <button mat-button (click)="hideAddStockFn()" class="btn btn-sm btn-primary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-12" *ngIf="stockDetails!== undefined && stockDetails!== null && stockDetails?.length>0">
+        <app-search-result [searchResult]="stockDetails"></app-search-result>
+    </div>
+    <div class="col-12" *ngIf="stockDetails=== undefined || stockDetails  === null || stockDetails?.length===0">
+        No Search Result
+    </div>
+</div>

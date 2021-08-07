@@ -1,0 +1,49 @@
+<table mat-table [hidden]="!isStockAvailable" [dataSource]="dataSource" class="mat-elevation-z8 table-style">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="stockPrice">
+        <th mat-header-cell *matHeaderCellDef> <span style="font-size: large;">Stock</span> </th>
+        <td mat-cell *matCellDef="let element"> {{element.stockPrice}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="stockDate">
+        <th mat-header-cell *matHeaderCellDef><span style="font-size: large;">Date</span></th>
+        <td mat-cell *matCellDef="let element"> {{element.stockDate}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="stocktime">
+        <th mat-header-cell *matHeaderCellDef><span style="font-size: large;">Time</span></th>
+        <td mat-cell *matCellDef="let element"> {{element.stocktime}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="shadow" [hidden]="isStockAvailable">
+    No search result
+</div>
+<br />
+<br />
+
+<table class="table table-bordered shadow table-style">
+    <tbody>
+        <tr>
+            <td>Min Price</td>
+            <td>{{stockDetail.minStock}}</td>
+        </tr>
+        <tr>
+            <td>Max Price</td>
+            <td>{{stockDetail.maxStock}}</td>
+        </tr>
+        <tr>
+            <td>Avg Price</td>
+            <td>{{stockDetail.avgStock}}</td>
+        </tr>
+    </tbody>
+</table>

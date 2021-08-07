@@ -1,0 +1,9 @@
+.border-margin {
+  margin: 0.5rem !important;
+  padding: 1rem 3rem;
+}
+
+.mat-select .mat-select-value {
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+}
